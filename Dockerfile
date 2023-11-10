@@ -22,9 +22,9 @@ COPY godot /opt/riscv/godot
 
 WORKDIR /opt/riscv/godot
 
-ENV GODOTFLAGS="use_llvm=yes arch=rv64"
-
-RUN scons -Q --debug=explain $GODOTFLAGS
+ENV GODOTFLAGS="use_llvm=yes linker=lld arch=rv64 verbose=yes warnings=all werror=yes debug_symbols=no target=editor production=yes"
+  
+RUN scons $GODOTFLAGS
 
 RUN cp bin/godot.linuxbsd.editor.rv64.llvm /usr/bin/godot
 
