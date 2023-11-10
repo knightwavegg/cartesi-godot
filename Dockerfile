@@ -16,6 +16,7 @@ RUN apt update && \
     libxi-dev \
     libxrandr-dev \
     clang \
+    lld-14 \
     llvm
 
 COPY godot /opt/riscv/godot
