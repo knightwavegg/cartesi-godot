@@ -22,7 +22,7 @@ COPY godot /opt/riscv/godot
 
 WORKDIR /opt/riscv/godot
 
-ENV GODOTFLAGS="use_llvm=yes linker=lld arch=rv64 verbose=yes warnings=all werror=yes debug_symbols=no target=editor production=yes"
+ENV GODOTFLAGS="use_llvm=yes linker=lld arch=rv64 scu_build=yes debug_symbols=no target=editor production=yes"
   
 RUN scons $GODOTFLAGS
 
