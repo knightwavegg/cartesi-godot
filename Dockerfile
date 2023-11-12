@@ -16,14 +16,14 @@ RUN apt update && \
     libxi-dev \
     libxrandr-dev \
     clang \
-    lld-14 \
     llvm
+
 
 COPY godot /opt/riscv/godot
 
 WORKDIR /opt/riscv/godot
 
-ENV GODOTFLAGS="use_llvm=yes linker=lld arch=rv64 scu_build=yes debug_symbols=no target=editor production=yes"
+ENV GODOTFLAGS="use_llvm=yes arch=rv64 scu_build=yes debug_symbols=no"
   
 RUN scons $GODOTFLAGS
 

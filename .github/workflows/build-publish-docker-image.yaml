@@ -2,8 +2,6 @@ name: Create and publish docker image
 
 on:
   workflow_dispatch:
-  push:
-    branches: ["main"]
 
 env:
   DAPP_NAME: cartesi-godot
