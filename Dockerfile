@@ -26,13 +26,20 @@ WORKDIR /opt/riscv/godot
 ENV GODOTFLAGS="use_llvm=yes arch=rv64 scu_build=yes debug_symbols=no fontconfig=no"
   
 RUN scons $GODOTFLAGS
+RUN cp bin/godot.linuxbsd.editor.rv64.llvm /usr/local/bin/godot
 
-RUN cp bin/godot.linuxbsd.editor.rv64.llvm /usr/bin/godot
+# Run a second build for the export template
+RUN scons $GODOTFLAGS target=template_debug
 
 FROM riscv64/ubuntu:22.04
 
-COPY --from=godot-build /usr/bin/godot /usr/bin/godot
-
 WORKDIR /opt/riscv
 
-RUN godot --headless --version
+ENV TEMPLATE_DIR=/root/.local/share/godot/export_templates/4.2.rc/
+
+COPY --from=godot-build /usr/local/bin/godot /usr/local/bin/godot
+
+RUN mkdir -p $TEMPLATE_DIR
+COPY --from=godot-build /opt/riscv/godot/bin/godot.linuxbsd.template_debug.rv64.llvm $TEMPLATE_DIR/linux_debug.x86_64
+
+CMD godot --headless --version
