@@ -24,7 +24,7 @@ COPY godot /opt/riscv/godot
 WORKDIR /opt/riscv/godot
 
 ENV GODOTFLAGS="use_llvm=yes arch=rv64 scu_build=yes debug_symbols=no fontconfig=no"
-  
+
 RUN scons $GODOTFLAGS
 RUN cp bin/godot.linuxbsd.editor.rv64.llvm /usr/local/bin/godot
 
@@ -35,7 +35,7 @@ FROM riscv64/ubuntu:22.04
 
 WORKDIR /opt/riscv
 
-ENV TEMPLATE_DIR=/root/.local/share/godot/export_templates/4.2.rc/
+ENV TEMPLATE_DIR=/root/.local/share/godot/export_templates/4.2.1.stable/
 
 COPY --from=godot-build /usr/local/bin/godot /usr/local/bin/godot
 

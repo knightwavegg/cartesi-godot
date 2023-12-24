@@ -5,7 +5,7 @@ on:
 
 env:
   DAPP_NAME: cartesi-godot
-  GODOT_VERSION: 4.2-rc1
+  GODOT_VERSION: 4.2.1-stable
 
 jobs:
   build_image:
