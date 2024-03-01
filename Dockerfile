@@ -1,4 +1,4 @@
-FROM riscv64/ubuntu:22.04 as godot-build
+FROM --platform=linux/riscv64 riscv64/ubuntu:22.04 as godot-build
 
 RUN apt update && \
     apt install -y \
@@ -31,7 +31,7 @@ RUN cp bin/godot.linuxbsd.editor.rv64.llvm /usr/local/bin/godot
 # Run a second build for the export template
 RUN scons $GODOTFLAGS target=template_debug
 
-FROM riscv64/ubuntu:22.04
+FROM --platform=linux/riscv64 riscv64/ubuntu:22.04
 
 WORKDIR /opt/riscv
 
